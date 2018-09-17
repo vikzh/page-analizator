@@ -29,6 +29,9 @@
         ]
     },
     "scripts": {
+        "phpunit": "phpunit",
+        "phpcs": "phpcs",
+        "heroku-php-apache2": "heroku-php-apache2",
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
