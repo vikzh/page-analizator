@@ -16,7 +16,8 @@
         @foreach ($domains as $domain)
             <tr>
                 <th scope="row">{{ $domain->id }}</th>
-                <td><a href="{{ route('domains.show', $domain->id) }}" class="badge badge-info">{{ $domain->name }}</a>
+                <td><a href="{{ route('domains.show', ['id' => $domain->id]) }}"
+                       class="badge badge-info">{{ $domain->name }}</a>
                 </td>
                 <td>Otto</td>
                 <td>@mdo</td>

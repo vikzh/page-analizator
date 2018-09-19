@@ -28,7 +28,7 @@ class DomainController extends Controller
         $domain = new Domain();
         $domain->name = $request->input('url');
         $domain->save();
-        return redirect()->route('domains.show', $domain->id);
+        return redirect(route('domains.show', ['id' => $domain->id]));
     }
 
     public function showDomains()

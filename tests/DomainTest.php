@@ -26,5 +26,8 @@ class DomainTest extends TestCase
         $this->post('/domains', ['url' => 'http://github.com/']);
 
         $this->seeInDatabase('domains', ['name' => 'http://github.com/']);
+
+        $content = $this->get('/domains')->response->getContent();
+        $this->assertContains('http://github.com/', $content);
     }
 }
