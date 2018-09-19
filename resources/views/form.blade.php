@@ -10,7 +10,7 @@
         <hr class="my-4">
         <p>Enter URL for testing:</p>
         <div class="mb-3">
-            <form action="{{ route('domain_store') }}" class="input-group input-group-lg" method="post">
+            <form action="{{ route('domains') }}" class="input-group input-group-lg" method="post">
                 <input name="url" type="text" class="form-control" placeholder="url">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit" id="button-addon2">Analyze</button>
