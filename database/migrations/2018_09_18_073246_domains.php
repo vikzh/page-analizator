@@ -16,6 +16,10 @@ class Domains extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('status')->default('_');
+            $table->string('code')->default('_');
+            $table->string('contLength')->default('_');
+            $table->text('body')->default('_');
             $table->timestamps();
         });
     }

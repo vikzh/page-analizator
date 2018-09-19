@@ -8,8 +8,9 @@
         <tr>
             <th scope="col">id</th>
             <th scope="col">Name</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Status</th>
+            <th scope="col">Code</th>
+            <th scope="col">Content Length</th>
         </tr>
         </thead>
         <tbody>
@@ -19,8 +20,9 @@
                 <td><a href="{{ route('domains.show', ['id' => $domain->id]) }}"
                        class="badge badge-info">{{ $domain->name }}</a>
                 </td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{ $domain->status }}</td>
+                <td>{{ $domain->code }}</td>
+                <td>{{ $domain->contLength }}</td>
             </tr>
         @endforeach
         </tbody>
