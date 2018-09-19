@@ -7,6 +7,6 @@ run:
 logs:
 		tail -f storage/logs/lumen.log
 deploy:
-        	heroku run php artisan migrate
+        heroku run php artisan migrate
 test:
 		composer run-script phpunit
