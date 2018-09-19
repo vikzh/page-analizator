@@ -33,7 +33,7 @@ class DomainController extends Controller
 
     public function showDomains()
     {
-        $domains = Domain::all();
+        $domains = Domain::paginate(10);
         return view('domains', ['domains' => $domains]);
     }
 }
