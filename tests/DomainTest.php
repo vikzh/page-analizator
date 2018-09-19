@@ -9,15 +9,22 @@ class DomainTest extends TestCase
 
     public function testForm()
     {
-        $this->get('/');
+        $this->get(route('form'));
 
         $this->assertResponseOk();
     }
 
     public function testDomains()
     {
-        $this->get(route('domains'));
+        $this->get(route('domains.index'));
 
         $this->assertResponseOk();
+    }
+
+    public function testUrlAdd()
+    {
+        $this->post('/domains', ['url' => 'http://github.com/']);
+
+        $this->seeInDatabase('domains', ['name' => 'http://github.com/']);
     }
 }
