@@ -26,19 +26,17 @@ class DomainController extends Controller
 
     public function store(Request $request)
     {
-        $domain = new Domain();
+        $client = new Client();
+        $response = $client->get($request->input('url'));
+        $contLength = $response->hasHeader('Content-Length') ?
+                    $response->getHeader('Content-Length')[0] : 0;
 
-        $inputUrl = $request->input('url');
-        $client = new Client(['base_uri' => $inputUrl]);
-        $response = $client->request('GET', '');
-        if ($response->hasHeader('Content-Length')) {
-            $domain->contLength = $response->getHeader('Content-Length')[0];
-        }
-        $domain->status = $response->getReasonPhrase();
-        $domain->code = $response->getStatusCode();
-        $domain->body = $response->getBody()->read(65500);
-        $domain->name = $inputUrl;
-        $domain->save();
+        $domain = Domain::create(['name' => $request->input('url'),
+            'status' => $response->getReasonPhrase(),
+            'code' => $response->getStatusCode(),
+            'contLength' => $contLength,
+            'body' => $response->getBody()->read(65500)
+        ]);
         return redirect(route('domains.show', ['id' => $domain->id]));
     }
 
