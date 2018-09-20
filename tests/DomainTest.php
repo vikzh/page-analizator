@@ -34,4 +34,9 @@ class DomainTest extends TestCase
         $content = $this->get('/domains')->response->getContent();
         $this->assertContains('http://github.com/', $content);
     }
+
+    public function testTegs()
+    {
+        $this->post('/domains', ['url' => 'https://laravel.com/']);
+    }
 }

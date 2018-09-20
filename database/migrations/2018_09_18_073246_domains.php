@@ -20,6 +20,9 @@ class Domains extends Migration
             $table->string('code')->default('_');
             $table->string('contLength')->default('_');
             $table->text('body')->default('_');
+            $table->string('heading');
+            $table->string('keyContent')->default('_');
+            $table->string('descContent')->default('_');
             $table->timestamps();
         });
     }

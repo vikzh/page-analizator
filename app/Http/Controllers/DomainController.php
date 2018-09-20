@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Domain;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use DiDom\Document;
 
 class DomainController extends Controller
 {
@@ -29,13 +30,22 @@ class DomainController extends Controller
         $client = new Client();
         $response = $client->get($request->input('url'));
         $contLength = $response->hasHeader('Content-Length') ?
-                    $response->getHeader('Content-Length')[0] : 0;
+            $response->getHeader('Content-Length')[0] : 0;
+        $body = $response->getBody()->read(65500);
+
+        $document = new Document($body);
+        $heading = $document->first('h1');
+        $keywords = $document->first('meta[name=keywords]');
+        $description = $document->first('meta[name=description]');
 
         $domain = Domain::create(['name' => $request->input('url'),
             'status' => $response->getReasonPhrase(),
             'code' => $response->getStatusCode(),
             'contLength' => $contLength,
-            'body' => $response->getBody()->read(65500)
+            'body' => $body,
+            'heading' => $heading ? $heading->text() : '_',
+            'keyContent' => $keywords ? $keywords->getAttribute('content') : '_',
+            'descContent' => $description ? $description->getAttribute('content') : '_',
         ]);
         return redirect(route('domains.show', ['id' => $domain->id]));
     }

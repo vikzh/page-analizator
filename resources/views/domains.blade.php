@@ -11,6 +11,9 @@
             <th scope="col">Status</th>
             <th scope="col">Code</th>
             <th scope="col">Content Length</th>
+            <th scope="col">h1</th>
+            <th scope="col">Keywords</th>
+            <th scope="col">Description</th>
         </tr>
         </thead>
         <tbody>
@@ -23,6 +26,9 @@
                 <td>{{ $domain->status }}</td>
                 <td>{{ $domain->code }}</td>
                 <td>{{ $domain->contLength }}</td>
+                <td>{{ $domain->heading }}</td>
+                <td>{{ $domain->keyContent }}</td>
+                <td>{{ $domain->descContent }}</td>
             </tr>
         @endforeach
         </tbody>
