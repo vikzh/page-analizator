@@ -4,14 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Container\Container;
 use GuzzleHttp\Client;
 use DiDom\Document;
 
 class DomainController extends Controller
 {
-    public function __construct()
+    private $client;
+    private $document;
+
+    public function __construct(Client $client)
     {
-        //
+        $this->client = $client;
     }
 
     public function index()
@@ -27,8 +31,7 @@ class DomainController extends Controller
 
     public function store(Request $request)
     {
-        $client = new Client();
-        $response = $client->get($request->input('url'));
+        $response = $this->client->request('GET', $request->input('url'));
         $contLength = $response->hasHeader('Content-Length') ?
             $response->getHeader('Content-Length')[0] : 0;
         $body = $response->getBody()->read(65500);
