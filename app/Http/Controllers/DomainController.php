@@ -13,9 +13,10 @@ class DomainController extends Controller
     private $client;
     private $document;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, Document $document)
     {
         $this->client = $client;
+        $this->document = $document;
     }
 
     public function index()
@@ -36,7 +37,7 @@ class DomainController extends Controller
             $response->getHeader('Content-Length')[0] : 0;
         $body = $response->getBody()->read(65500);
 
-        $document = new Document($body);
+        $document = $this->document->create($body);
         $heading = $document->first('h1');
         $keywords = $document->first('meta[name=keywords]');
         $description = $document->first('meta[name=description]');
