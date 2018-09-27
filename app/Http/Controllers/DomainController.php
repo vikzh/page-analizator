@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Domain;
 use Illuminate\Http\Request;
-use Illuminate\Container\Container;
 use GuzzleHttp\Client;
 use DiDom\Document;
 
@@ -32,6 +31,10 @@ class DomainController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'url' => 'required|url'
+        ]);
+
         $response = $this->client->request('GET', $request->input('url'));
         $contLength = $response->hasHeader('Content-Length') ?
             $response->getHeader('Content-Length')[0] : 0;
